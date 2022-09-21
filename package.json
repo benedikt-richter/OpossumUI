@@ -94,6 +94,7 @@
     "test:changed": "react-scripts test --watchAll=false --setupFilesAfterEnv=./setupTests.ts --onlyChanged",
     "test:all": "react-scripts test --watchAll=false src/ --setupFilesAfterEnv=./setupTests.ts --testPathIgnorePatterns=src/e2e-tests --testMatch=[ \"**/__(tests|tests-ci)__/**/*.ts?(x)\", \"**/?(*.)+(test).ts?(x)\" ] && yarn test:e2e",
     "test:integration-ci": "react-scripts test --watchAll=false src/Frontend/integration-tests --setupFilesAfterEnv=./setupTests.ts --testMatch=[ \"**/__(tests|tests-ci)__/**/*.ts?(x)\", \"**/?(*.)+(test).ts?(x)\" ]",
+    "test:coverage": "react-scripts test --watchAll=false --setupFilesAfterEnv=./setupTests.ts --testPathIgnorePatterns=src/e2e-tests --testMatch=[ \"**/__(tests|tests-ci)__/**/*.ts?(x)\", \"**/?(*.)+(test).ts?(x)\" ] --coverage",
     "test:e2e": "run-script-os",
     "test:e2e:darwin:linux": "concurrently -s first -k true \"yarn build:dev; BROWSER=none react-scripts start\" \"wait-on http://127.0.0.1:3000 && react-scripts test --watchAll=false --detectOpenHandles --forceExit src/e2e-tests\"",
     "test:e2e:win32": "concurrently -s first -k true \"yarn build:dev & cross-env BROWSER=none react-scripts start\" \"wait-on http://127.0.0.1:3000 && react-scripts test --watchAll=false --detectOpenHandles --forceExit src/e2e-tests\"",
