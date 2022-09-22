@@ -44,6 +44,7 @@ jobs:
         with:
           test-script: yarn test:unit
           package-manager: yarn
+          output: report-markdown
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: ${{ steps.coverage.outputs.report }}
