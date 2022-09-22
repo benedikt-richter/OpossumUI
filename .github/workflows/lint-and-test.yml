@@ -38,15 +38,12 @@ jobs:
       - run: yarn install --network-timeout 560000
       - run: yarn lint-check
       - run: yarn compile-all
-      - run: yarn test:unit
 
       - uses: ArtiomTr/jest-coverage-report-action@v2
         id: coverage
         with:
-          coverage-file: coverage/coverage-final.json
-          base-coverage-file: coverage/coverage-final.json
+          test-script: yarn test:unit
           package-manager: yarn
-          skip-step: all
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: ${{ steps.coverage.outputs.report }}
