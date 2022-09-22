@@ -44,6 +44,9 @@ jobs:
         id: coverage
         with:
           coverage-file: coverage/coverage-final.json
+          base-coverage-file: coverage/coverage-final.json
+          package-manager: yarn
+          skip-step: all
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: ${{ steps.coverage.outputs.report }}
