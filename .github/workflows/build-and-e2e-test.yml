@@ -35,15 +35,17 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v3
 
-      - name: Install Node.js, NPM and Yarn
+      - name: Install Node.js and Yarn
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile --network-timeout 560000
+
       - name: Increase watches
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
         if: matrix.os == 'ubuntu-latest'
 
-      - run: yarn install --network-timeout 560000
       - name: Run end2end tests
         run: ${{ matrix.E2E }}
       - run: yarn ${{ matrix.SHIP }}

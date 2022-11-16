@@ -31,11 +31,13 @@ jobs:
       - name: Check out git repository
         uses: actions/checkout@v3
 
-      - name: Install Node.js, NPM and Yarn
+      - name: Install Node.js and Yarn
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: yarn install --network-timeout 560000
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile --network-timeout 560000
+
       - run: yarn ${{ matrix.SHIP }}
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
