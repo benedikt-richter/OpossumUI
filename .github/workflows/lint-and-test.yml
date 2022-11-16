@@ -7,8 +7,6 @@ name: Lint and Test
 
 on:
   push:
-    branches:
-      - main
   pull_request:
     types: [opened, reopened, synchronize]
 
@@ -19,11 +17,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
         include:
           - os: ubuntu-latest
-          - os: macos-latest
-          - os: windows-latest
+
 
     steps:
       - name: Check out Git repository
@@ -36,11 +33,3 @@ jobs:
           cache: 'yarn'
       - run: yarn install --frozen-lockfile --network-timeout 560000
 
-      - name: Increase watches
-        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-        if: matrix.os == 'ubuntu-latest'
-
-      - run: yarn lint-check
-      - run: yarn compile-all
-      - run: yarn test:unit
-      - run: yarn test:integration-ci
